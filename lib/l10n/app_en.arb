@@ -1,0 +1,25 @@
+{
+    "login" : "Log In",
+    "welcome_log_in_with_your_phone_number" : "Welcome, log in with your phone number.",
+    "phone_number" : "Phone Number",
+    "password" : "Password",
+    "enter_your_password" : "enter your password",
+    "forgot_password" : "Forgot password!",
+    "dont_have_an_account" : "don't have an account?",
+    "register_now" : "Register now",
+    "create_new_account" : "create new account",
+    "hello_we_are_glad_you_have_joined_our_family" : "Hello, we are glad you have joined our family.",
+    "full_name" : "Full name",
+    "enter_your_name" : "enter your name",
+    "email" : "Email",
+    "confirm_password" : "Confirm password",
+    "re_enter_your_password" : "re enter your password",
+    "i_agree_to" : "I agree to ",
+    "terms_of_service_and_privacy_policy" : "Terms of Service and Privacy Policy.",
+    "continue_" : "Continue",
+    "registration_completed" : "Registration completed",
+    "got_it" : "Got It",
+    "already_have_an_account" : "Already have an account!",
+    "ok" : "OK"
+
+}

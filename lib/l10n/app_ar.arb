@@ -1,0 +1,27 @@
+{
+    "login" : "تسجيل الدخول",
+    "welcome_log_in_with_your_phone_number" : "مرحبًا ، سجل الدخول باستخدام رقم هاتفك.",
+    "phone_number" : "رقم الهاتف",
+    "password" : "كلمة المرور",
+    "enter_your_password" : "أدخل كلمة المرور الخاصة بك",
+    "forgot_password" : "هل نسيت كلمة السر!",
+    "dont_have_an_account" : "ليس لديك حساب؟",
+    "register_now" : "سجل الان",
+    "create_new_account" : "انشاء حساب جديد",
+    "hello_we_are_glad_you_have_joined_our_family" : "مرحبًا ، يسعدنا انضمامك إلى عائلتنا.",
+    "full_name" : "الاسم الكامل",
+    "enter_your_name" : "أدخل أسمك",
+    "email" : "البريد الالكتروني",
+    "confirm_password" : "تأكيد كلمة المرور",
+    "re_enter_your_password" : "أعد إدخال كلمة المرور",
+    "i_agree_to" : "أوافق على ",
+    "terms_of_service_and_privacy_policy" : "شروط الخدمة وسياسة الخصوصية.",
+    "continue_" : "استمرار",
+    "registration_completed" : "أكملت تسجيل",
+    "got_it" : "فهمتها",
+    "already_have_an_account" : "هل لديك حساب!",
+    "ok" : "حسنا"
+
+
+
+}
