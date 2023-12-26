@@ -29,22 +29,43 @@ class _ItemScreenState extends State<ItemScreen> {
       appBar: AppBar(),
       body: Consumer<ItemProvider>(
         builder: (context, value, child) {
-          return ListView.builder(
+          return GridView.builder(
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemCount: value.list.length,
             itemBuilder: (context, index) {
               return InkWell(
-                child: Column(
-                  children: [
-                    Image.network(
-                      value.list[index].ImageURL,
-                    ),
-                    Text(
-                      value.list[index].Name,
-                    ),
-                    Text(
-                      value.list[index].Price.toString(),
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                             10),
+                        ),
+
+                            child:  ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                value.list[index].ImageURL,
+                                fit: BoxFit.fill,
+                              ),
+
+                        ),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        value.list[index].Name,style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "Price:${value.list[index].Price.toString()}",
+                        style: TextStyle(fontSize: 12,color: Colors.red),
+                      ),
+                    ],
+                  ),
                 ),
                 onTap: () async {
                   await Provider.of<CartProvider>(context, listen: false)

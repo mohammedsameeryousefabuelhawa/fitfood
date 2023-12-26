@@ -13,6 +13,8 @@ class BannerProvider extends ChangeNotifier {
       Uri.parse("${ConstantValue.BASE_URL}getBannerImages.php"),
     );
 print(response.body);
+print(response.statusCode);
+
     if (response.statusCode == 200) {
       var jsonBody = jsonDecode(response.body);
       var bannerImage = jsonBody['bannerImage'];
