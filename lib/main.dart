@@ -3,6 +3,7 @@ import 'package:ecommerce/providers/cart_provider.dart';
 import 'package:ecommerce/providers/categories_provider.dart';
 import 'package:ecommerce/providers/item_provider.dart';
 import 'package:ecommerce/providers/shop_provider.dart';
+import 'package:ecommerce/view/screens/login_screen.dart';
 import 'package:ecommerce/view/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,7 +17,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -38,10 +38,20 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        initialRoute: '/',
+        routes: {
+          '/orders': (context) => Text("orders"),
+          '/QR': (context) => Text("ScanQR"),
+          '/aboutUs': (context) => Text("aboutUs"),
+          '/pp': (context) => Text("Privacy Policy"),
+          '/login': (context) => LoginScreen(),
+          // Add routes for other pages
+        },
+
         title: 'FitFood',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightGreen).copyWith(background: Colors.orange),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange).copyWith(background: Colors.orange),
 
         ),
         localizationsDelegates: const [
@@ -54,7 +64,7 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('ar'),
         ],
-        home: const SplashScreen(),
+        home: const LoginScreen(),
       ),
     );
   }

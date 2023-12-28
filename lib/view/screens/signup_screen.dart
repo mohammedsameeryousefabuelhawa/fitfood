@@ -277,7 +277,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           AppLocalizations.of(context)!.login,
                           style: GoogleFonts.poppins(
                             textStyle: TextStyle(
-                              color: Colors.purple[400],
+                              color: Color(0xffe09f29),
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),

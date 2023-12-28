@@ -3,8 +3,9 @@ class Assets {
   Assets._();
 
   static const String imagesBackground = 'assets/images/background.png';
+  static const String imagesFitfoodlogo = 'assets/images/fitfoodlogo.png';
   static const String imagesLike = 'assets/images/like.png';
-  static const String imagesLogo = 'assets/images/fitfoodlogo.png';
-  static const String imagesLogo1 = 'assets/images/logo1.png';
+  static const String imagesLogo1 = 'assets/images/logo3.png';
+  static const String imagesLogo2 = 'assets/images/AppleLogo.png';
 
 }

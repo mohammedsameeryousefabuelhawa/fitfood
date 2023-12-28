@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 1,
         height: 50,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(38), color: Colors.purple[300]),
+            borderRadius: BorderRadius.circular(38), color: Color(0xffe09f29)),
         child: Center(
           child: Text(
             text,

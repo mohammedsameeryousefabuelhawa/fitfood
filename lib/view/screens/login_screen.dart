@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Center(
                     child: Image.asset(
-                      "assets/images/fitfoodlogo.png",
+                      "assets/images/AppleLogo.png",
                     ),
                   ),
                 ],
@@ -193,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           AppLocalizations.of(context)!.register_now,
                           style: GoogleFonts.poppins(
                             textStyle: TextStyle(
-                                color: Colors.purple[400],
+                                color: Color(0xffe09f29),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500),
                           ),

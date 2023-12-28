@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
             fit: BoxFit.fill,
           ),
           Center(
-            child: Image.asset("assets/images/fitfoodlogo.png"),
+            child: Image.asset("assets/images/AppleLogo.png"),
           )
         ],
       ),
