@@ -6,21 +6,11 @@ import '../../../general.dart';
 class MyDrawer extends StatelessWidget {
   final List<Map<String, dynamic>> drawerItems = [
     {'title': 'Orders', 'icon': Icons.shopping_cart, 'route': '/orders'},
-    {'title': 'Share', 'icon': Icons.share, 'route': '/orders'},
-    {
-      'title': 'Share with Scan QR',
-      'icon': Icons.qr_code_scanner,
-      'route': '/QR'
-    },
+    {'title': 'Share with Scan QR', 'icon': Icons.qr_code_scanner, 'route': '/QR'},
     {'title': 'About Us', 'icon': Icons.info, 'route': '/aboutUs'},
     {'title': 'Privacy Policies', 'icon': Icons.privacy_tip, 'route': '/pp'},
-    {'title': 'Contact Us', 'icon': Icons.contact_mail, 'route': '/orders'},
-    {'title': 'Languages', 'icon': Icons.language, 'route': '/orders'},
-    {'title': 'Delete Account', 'icon': Icons.delete, 'route': '/orders'},
-    {
-      'title': 'Log Out',
-      'icon': Icons.logout,
-    },
+    {'title': 'Contact Us', 'icon': Icons.contact_mail, 'route': '/CU'},
+    {'title': 'Log Out', 'icon': Icons.logout,},
   ]; // Add your items
 
   @override

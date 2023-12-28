@@ -147,7 +147,7 @@ class _MainScreenState extends State<MainScreen> {
                             );
                           },
                           color: value.list[index].selected
-                              ? const Color.fromRGBO(100, 100, 250, 1)
+                              ? const Color(0xffe09f29)
                               : const Color.fromRGBO(200, 200, 200, 1),
                         );
                       },

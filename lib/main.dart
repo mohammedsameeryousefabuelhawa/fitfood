@@ -10,6 +10,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'view/screens/About_Us_Screen.dart';
+import 'view/screens/Contact_Us.dart';
+import 'view/screens/ScanQR.dart';
+import 'view/screens/privacy policies.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -41,10 +46,11 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/orders': (context) => Text("orders"),
-          '/QR': (context) => Text("ScanQR"),
-          '/aboutUs': (context) => Text("aboutUs"),
-          '/pp': (context) => Text("Privacy Policy"),
+          '/QR': (context) => QRCodePage(),
+          '/aboutUs': (context) => AboutUsScreen(),
+          '/pp': (context) => PrivacyPolicyScreen(),
           '/login': (context) => LoginScreen(),
+          '/CU': (context) => ContactUsScreen(),
           // Add routes for other pages
         },
 
@@ -64,7 +70,7 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('ar'),
         ],
-        home: const LoginScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
