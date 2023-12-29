@@ -8,6 +8,21 @@ import 'package:http/http.dart' as http;
 class ItemProvider extends ChangeNotifier {
   List<ItemModel> list = [];
 
+  ItemModel getItemById(String itemId) {
+    var item = list.firstWhere((item) => item.Id == itemId,
+        orElse: () => ItemModel(
+              Id: '',
+              ImageURL: '',
+              Name: '',
+              NameAr: '',
+              Price: 0.0,
+              Description: '',
+              DescriptionAr: '',
+            ));
+
+    return item;
+  }
+
   getItems({required String idShop}) async {
     list = [];
     final response = await http.post(
@@ -18,7 +33,7 @@ class ItemProvider extends ChangeNotifier {
         "Id_shops": idShop,
       },
     );
-print(response.body);
+    print(response.body);
     if (response.statusCode == 200) {
       var jsonBody = jsonDecode(response.body);
       var items = jsonBody["items"];

@@ -25,6 +25,7 @@ class _CartScreenState extends State<CartScreen> {
       body: Column(
         children: [
           Container(
+            decoration: BoxDecoration(border: Border.all(style: BorderStyle.solid)),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * .6,
             child: Consumer<CartProvider>(
@@ -97,7 +98,12 @@ class _CartScreenState extends State<CartScreen> {
             height: MediaQuery.of(context).size.height * .2,
             child: Consumer<CartProvider>(
               builder: (context, value, child) {
-                return Text("Total Price  = ${value.totalPrice}");
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text("Total Price  = ${value.totalPrice}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  ],
+                );
               },
             ),
           ),

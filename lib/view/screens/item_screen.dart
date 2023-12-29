@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Item_details_Screen.dart';
+
 class ItemScreen extends StatefulWidget {
   String idShop;
 
@@ -31,7 +33,7 @@ class _ItemScreenState extends State<ItemScreen> {
         builder: (context, value, child) {
           return GridView.builder(
             gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemCount: value.list.length,
             itemBuilder: (context, index) {
               return InkWell(
@@ -41,39 +43,37 @@ class _ItemScreenState extends State<ItemScreen> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                             10),
+                          borderRadius: BorderRadius.circular(10),
                         ),
-
-                            child:  ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                value.list[index].ImageURL,
-                                fit: BoxFit.fill,
-                              ),
-
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(
+                            value.list[index].ImageURL,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                       SizedBox(
                         height: 4,
                       ),
                       Text(
-                        value.list[index].Name,style: TextStyle(fontWeight: FontWeight.bold),
+                        value.list[index].Name,
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "Price:${value.list[index].Price.toString()}",
-                        style: TextStyle(fontSize: 12,color: Colors.red),
+                        style: TextStyle(fontSize: 12, color: Colors.red),
                       ),
                     ],
                   ),
                 ),
-                onTap: () async {
-                  await Provider.of<CartProvider>(context, listen: false)
-                      .addToCart(idItem: value.list[index].Id);
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CartScreen(),
+                      builder: (context) => ItemDetailsScreen(
+                        itemId: value.list[index].Id,
+                      ),
                     ),
                   );
                 },
