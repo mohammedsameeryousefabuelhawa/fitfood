@@ -1,8 +1,9 @@
 import 'package:ecommerce/providers/cart_provider.dart';
-import 'package:ecommerce/view/screens/add_order_creen.dart';
-import 'package:ecommerce/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../widget/custom_button.dart';
+import 'add_order_creen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});

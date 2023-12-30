@@ -1,6 +1,4 @@
-import 'package:ecommerce/providers/cart_provider.dart';
 import 'package:ecommerce/providers/item_provider.dart';
-import 'package:ecommerce/view/screens/cart_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

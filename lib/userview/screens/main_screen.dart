@@ -1,15 +1,14 @@
 import 'package:ecommerce/providers/banner_images_provider.dart';
 import 'package:ecommerce/providers/categories_provider.dart';
 import 'package:ecommerce/providers/shop_provider.dart';
-import 'package:ecommerce/view/screens/all_categories_screen.dart';
-import 'package:ecommerce/view/screens/item_screen.dart';
-import 'package:ecommerce/view/widget/custom_category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../widget/Drawer.dart';
+import '../widget/custom_category.dart';
+import 'all_categories_screen.dart';
+import 'item_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

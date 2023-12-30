@@ -1,15 +1,14 @@
 import 'dart:convert';
-
 import 'package:ecommerce/const_values.dart';
 import 'package:ecommerce/general.dart';
-import 'package:ecommerce/view/screens/main_screen.dart';
-import 'package:ecommerce/view/screens/signup_screen.dart';
-import 'package:ecommerce/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../widget/custom_button.dart';
+import 'main_screen.dart';
+import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

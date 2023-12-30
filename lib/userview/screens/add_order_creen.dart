@@ -3,12 +3,13 @@ import 'dart:convert';
 import 'package:ecommerce/const_values.dart';
 import 'package:ecommerce/general.dart';
 import 'package:ecommerce/providers/cart_provider.dart';
-import 'package:ecommerce/view/screens/main_screen.dart';
-import 'package:ecommerce/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+
+import '../widget/custom_button.dart';
+import 'main_screen.dart';
 
 class AddOrderScreen extends StatefulWidget {
   const AddOrderScreen({super.key});

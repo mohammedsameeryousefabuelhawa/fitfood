@@ -3,17 +3,18 @@ import 'package:ecommerce/providers/cart_provider.dart';
 import 'package:ecommerce/providers/categories_provider.dart';
 import 'package:ecommerce/providers/item_provider.dart';
 import 'package:ecommerce/providers/shop_provider.dart';
-import 'package:ecommerce/view/screens/login_screen.dart';
-import 'package:ecommerce/view/screens/splash_screen.dart';
+import 'package:ecommerce/userview/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'view/screens/About_Us_Screen.dart';
-import 'view/screens/Contact_Us.dart';
-import 'view/screens/ScanQR.dart';
-import 'view/screens/privacy policies.dart';
+import 'userview/screens/About_Us_Screen.dart';
+import 'userview/screens/Contact_Us.dart';
+import 'userview/screens/ScanQR.dart';
+import 'userview/screens/login_screen.dart';
+import 'userview/screens/privacy policies.dart';
+
 
 void main() {
   runApp(const MyApp());

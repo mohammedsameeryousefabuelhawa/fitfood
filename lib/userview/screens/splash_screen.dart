@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'package:ecommerce/const_values.dart';
 import 'package:ecommerce/general.dart';
-import 'package:ecommerce/view/screens/main_screen.dart';
-
 import 'login_screen.dart';
 import 'package:flutter/material.dart';
+import 'main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
