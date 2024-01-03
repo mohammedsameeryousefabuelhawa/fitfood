@@ -33,18 +33,14 @@ class _MainScreenState extends State<MainScreen> {
     );
     await Provider.of<ShopProvider>(context, listen: false).getShops(
       idCategories:
-      Provider
-          .of<CategoriesProvider>(context, listen: false)
-          .list[0].Id,
+          Provider.of<CategoriesProvider>(context, listen: false).list[0].Id,
       lang: "en",
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery
-        .of(context)
-        .size;
+    size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -52,7 +48,12 @@ class _MainScreenState extends State<MainScreen> {
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        actions: [ Image.asset("assets/images/AppleLogo.png", fit: BoxFit.cover,),],
+        actions: [
+          Image.asset(
+            "assets/images/AppleLogo.png",
+            fit: BoxFit.cover,
+          ),
+        ],
       ),
       drawer: MyDrawer(),
       body: SingleChildScrollView(
@@ -94,10 +95,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * .1,
+                height: MediaQuery.of(context).size.height * .1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -105,9 +103,9 @@ class _MainScreenState extends State<MainScreen> {
                       builder: (context, value, child) {
                         return value.categoriesModel != null
                             ? Text(
-                          "Categoris",
-                          style: TextStyle(fontSize: 25),
-                        )
+                                "Categoris",
+                                style: TextStyle(fontSize: 25),
+                              )
                             : Text("");
                       },
                     ),
@@ -155,10 +153,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * .1,
+                height: MediaQuery.of(context).size.height * .1,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -168,9 +163,9 @@ class _MainScreenState extends State<MainScreen> {
                         builder: (context, value, child) {
                           return value.categoriesModel != null
                               ? Text(
-                            "${value.categoriesModel!.Name} restaurant",
-                            style: TextStyle(fontSize: 25),
-                          )
+                                  "${value.categoriesModel!.Name} restaurant",
+                                  style: TextStyle(fontSize: 25),
+                                )
                               : Text("");
                         },
                       ),
@@ -191,7 +186,7 @@ class _MainScreenState extends State<MainScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    ItemScreen(idShop: value.list[index].Id),
+                                    ItemScreen(idShop: value.list[index].shop_id),
                               ),
                             );
                           },
@@ -202,7 +197,7 @@ class _MainScreenState extends State<MainScreen> {
                                 children: [
                                   Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Image.network(
                                         value.list[index].ImageURL,
@@ -212,13 +207,20 @@ class _MainScreenState extends State<MainScreen> {
                                       Column(
                                         children: [
                                           Text(value.list[index].Name),
-                                          Text(value.list[index].description
-                                              .toString(), style: TextStyle(
-                                              fontSize: 13, color: Colors.red)),
+                                          Text(
+                                              value.list[index].description
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: Colors.red)),
                                         ],
                                       ),
-                                      SizedBox(width: 10,),
-                                      SizedBox(width: 10,),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
                                       Icon(Icons.forward),
                                     ],
                                   ),

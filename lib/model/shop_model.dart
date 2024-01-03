@@ -1,5 +1,5 @@
 class ShopModel {
-  String Id;
+  String shop_id;
   String Name;
   String ImageURL;
   double Longitude;
@@ -7,7 +7,7 @@ class ShopModel {
   String description;
 
   ShopModel({
-    required this.Id,
+    required this.shop_id,
     required this.description,
     required this.Name,
     required this.ImageURL,
@@ -17,7 +17,7 @@ class ShopModel {
 
   factory ShopModel.fromJson(var json) {
     return ShopModel(
-      Id: json['Id'],
+      shop_id: json['shop_id'],
       Name: json['Name'],
       ImageURL: json['ImageURL'],
       Longitude: json['Longitude'],

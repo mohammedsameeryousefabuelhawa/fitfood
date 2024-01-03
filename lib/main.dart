@@ -2,7 +2,11 @@ import 'package:ecommerce/providers/banner_images_provider.dart';
 import 'package:ecommerce/providers/cart_provider.dart';
 import 'package:ecommerce/providers/categories_provider.dart';
 import 'package:ecommerce/providers/item_provider.dart';
+import 'package:ecommerce/providers/orderprovier.dart';
+import 'package:ecommerce/providers/orderstatusprovider.dart';
 import 'package:ecommerce/providers/shop_provider.dart';
+import 'package:ecommerce/resAdmin/AdminDashboard.dart';
+import 'package:ecommerce/userview/screens/orders.dart';
 import 'package:ecommerce/userview/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -27,6 +31,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<OrderProvider>(
+          create: (context) => OrderProvider(),
+        ),
+        ChangeNotifierProvider<orderstatusProvider>(
+          create: (context) => orderstatusProvider(),
+        ),
         ChangeNotifierProvider<BannerProvider>(
           create: (context) => BannerProvider(),
         ),
@@ -46,7 +56,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: '/',
         routes: {
-          '/orders': (context) => Text("orders"),
+          '/orders': (context) => orderscreen(),
           '/QR': (context) => QRCodePage(),
           '/aboutUs': (context) => AboutUsScreen(),
           '/pp': (context) => PrivacyPolicyScreen(),
@@ -71,7 +81,7 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('ar'),
         ],
-        home: const SplashScreen(),
+        home:  SplashScreen(),
       ),
     );
   }
