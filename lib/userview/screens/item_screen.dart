@@ -70,7 +70,8 @@ class _ItemScreenState extends State<ItemScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ItemDetailsScreen(
-                        itemId: value.list[index].Id,
+                        itemId: value.list[index].Id, idShop: widget.idShop,
+
                       ),
                     ),
                   );

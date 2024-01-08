@@ -109,19 +109,19 @@ class _MainScreenState extends State<MainScreen> {
                             : Text("");
                       },
                     ),
-                    TextButton(
-                      child: Text("see all"),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return AllCategoriesScreen();
-                            },
-                          ),
-                        );
-                      },
-                    ),
+                    // TextButton(
+                    //   child: Text("see all"),
+                    //   onPressed: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) {
+                    //           return AllCategoriesScreen();
+                    //         },
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                   ],
                 ),
               ),

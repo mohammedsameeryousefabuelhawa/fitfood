@@ -13,6 +13,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'Admin/HomeScreen.dart';
+import 'providers/allshopprovider.dart';
 import 'userview/screens/About_Us_Screen.dart';
 import 'userview/screens/Contact_Us.dart';
 import 'userview/screens/ScanQR.dart';
@@ -31,6 +33,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<AllShopProvider>(
+          create: (context) => AllShopProvider(),
+        ),
         ChangeNotifierProvider<OrderProvider>(
           create: (context) => OrderProvider(),
         ),
@@ -81,7 +86,7 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('ar'),
         ],
-        home:  SplashScreen(),
+        home:  AdminHomeScreenPage(),
       ),
     );
   }

@@ -9,7 +9,8 @@ import '../widget/custom_button.dart';
 import 'main_screen.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+  String idShop;
+  CartScreen({required this.idShop});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -137,6 +138,7 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
   addOrder() async {
+    print("function ");
     final response = await http.post(
       Uri.parse("${ConstantValue.BASE_URL}addOrder.php"),
       body: {
@@ -145,8 +147,11 @@ class _CartScreenState extends State<CartScreen> {
             .totalPrice
             .toString(),
         "Notes": note.text,
+        "shop_id": widget.idShop.toString(),
+
       },
     );
+    print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonBody = jsonDecode(response.body);
       if (jsonBody["result"]) {

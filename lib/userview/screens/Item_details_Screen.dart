@@ -6,14 +6,20 @@ import 'package:ecommerce/providers/item_provider.dart';
 import '../../providers/cart_provider.dart';
 import 'cart_screen.dart';
 
-class ItemDetailsScreen extends StatelessWidget {
+class ItemDetailsScreen extends StatefulWidget {
   final String itemId;
+  final String idShop;
 
-  ItemDetailsScreen({required this.itemId});
+  ItemDetailsScreen({required this.itemId,required this.idShop});
 
   @override
+  State<ItemDetailsScreen> createState() => _ItemDetailsScreenState();
+}
+
+class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
+  @override
   Widget build(BuildContext context) {
-    var item = Provider.of<ItemProvider>(context, listen: false).getItemById(itemId);
+    var item = Provider.of<ItemProvider>(context, listen: false).getItemById(widget.itemId);
 
     return Scaffold(
       appBar: AppBar(
@@ -58,10 +64,11 @@ class ItemDetailsScreen extends StatelessWidget {
               onPressed: () async {
                 await Provider.of<CartProvider>(context, listen: false)
                     .addToCart(idItem: item.Id);
+                print("object");
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CartScreen(),
+                    builder: (context) => CartScreen(idShop: widget.idShop,),
                   ),
                 );
               },

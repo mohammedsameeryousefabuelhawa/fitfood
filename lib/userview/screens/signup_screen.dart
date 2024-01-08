@@ -304,7 +304,7 @@ class _SignupScreenState extends State<SignupScreen> {
         "Email": emailTextEditingController.text,
         "ConCode": countryCode,
         "Phone": phoneTextEditingController.text,
-        "lang": "ar"
+        "lang": "en"
       },
     );
     if (response.statusCode == 200) {
