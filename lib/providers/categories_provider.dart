@@ -16,6 +16,7 @@ class CategoriesProvider extends ChangeNotifier {
     );
     print(response.body);
     if (response.statusCode == 200) {
+      list.clear();
       var jsonBody = jsonDecode(response.body);
       var categories = jsonBody['categories'];
       for (Map i in categories) {

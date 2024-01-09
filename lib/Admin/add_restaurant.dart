@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/categories_provider.dart';
 
 class AddRestaurantScreen extends StatefulWidget {
   @override
@@ -14,8 +17,18 @@ class _AddRestaurantScreenState extends State<AddRestaurantScreen> {
   TextEditingController idCategoriesController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   String? selectedStatusType;
+  String? selectedCategory;
 
   @override
+   initState()  {
+    // TODO: implement initState
+    super.initState();
+    initData();
+  }
+  void initData() async {
+    await Provider.of<CategoriesProvider>(context, listen: false).getCategories(lang: "en");
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -44,11 +57,7 @@ class _AddRestaurantScreenState extends State<AddRestaurantScreen> {
                   label: 'Name (Arabic)',
                   icon: Icons.restaurant_menu,
                 ),
-                _buildTextFieldWithIcon(
-                  controller: idCategoriesController,
-                  label: 'ID Categories',
-                  icon: Icons.category,
-                ),
+                _buildCategoriesDropDown(),
                 _buildStatusTypeDropDown(),
                 _buildTextFieldWithIcon(
                   controller: descriptionController,
@@ -103,6 +112,40 @@ class _AddRestaurantScreenState extends State<AddRestaurantScreen> {
           return null;
         },
       ),
+    );
+  }
+  Widget _buildCategoriesDropDown() {
+    return Consumer<CategoriesProvider>(
+      builder: (BuildContext context, CategoriesProvider value, Widget? child) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: DropdownButtonFormField<String>(
+            value: selectedCategory,
+            decoration: InputDecoration(
+              labelText: 'Categories',
+              prefixIcon: Icon(Icons.check_circle),
+              border: OutlineInputBorder(),
+            ),
+            items: value.list.map((category) {
+              return DropdownMenuItem<String>(
+                value: category.Name,
+                child: Text(category.Name),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                selectedCategory = value;
+              });
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please select a Category';
+              }
+              return null;
+            },
+          ),
+        );
+      },
     );
   }
 
