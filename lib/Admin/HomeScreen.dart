@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'add_restaurant.dart';
 import 'all_restaurant_screen.dart';
 
 
@@ -61,7 +62,7 @@ class AdminHomeScreenPage extends StatelessWidget {
   void _navigateToPage(BuildContext context, String eventName) {
     switch (eventName.toLowerCase()) {
       case 'add restaurant':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Text("menu")));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AddRestaurantScreen()));
         break;
       case 'edit restaurant':
         Navigator.push(context, MaterialPageRoute(builder: (context) => AllrestaurantScreen()));
