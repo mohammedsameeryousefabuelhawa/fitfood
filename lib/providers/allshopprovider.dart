@@ -17,10 +17,13 @@ class AllShopProvider extends ChangeNotifier {
     );
     print(response.body);
     if (response.statusCode == 200) {
+      list.clear();
+      listSearch.clear();
       var jsonBody = jsonDecode(response.body);
       var shops = jsonBody["shopes"];
       for (Map i in shops) {
         list.add(ShopModel.fromJson(i));
+        listSearch.add(ShopModel.fromJson(i));
       }
       notifyListeners();
     }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:http/http.dart' as http;
+import '../const_values.dart';
+import '../providers/StatusTypeProvider.dart';
 import '../providers/categories_provider.dart';
+import 'add_restaurant_admin.dart';
 
 class AddRestaurantScreen extends StatefulWidget {
   @override
@@ -26,7 +29,11 @@ class _AddRestaurantScreenState extends State<AddRestaurantScreen> {
     initData();
   }
   void initData() async {
-    await Provider.of<CategoriesProvider>(context, listen: false).getCategories(lang: "en");
+    await Provider.of<CategoriesProvider>(context, listen: false)
+        .getCategories(lang: "en");
+    await Provider.of<StatusType>(context, listen: false)
+        .getstatus();
+
   }
 
   Widget build(BuildContext context) {
@@ -68,10 +75,7 @@ class _AddRestaurantScreenState extends State<AddRestaurantScreen> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // The form is valid, implement your logic to save the restaurant data
-                      // You can access the entered values using the controllers
-                      // For example: imageUrlController.text, nameController.text, etc.
-                      // Implement your logic to save the data to your database or perform any other actions.
+                      add();
                     }
                   },
                   child: Text('Add Restaurant'),
@@ -85,33 +89,37 @@ class _AddRestaurantScreenState extends State<AddRestaurantScreen> {
   }
 
   Widget _buildStatusTypeDropDown() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: DropdownButtonFormField<String>(
-        value: selectedStatusType,
-        decoration: InputDecoration(
-          labelText: 'Status Type',
-          prefixIcon: Icon(Icons.check_circle),
-          border: OutlineInputBorder(),
-        ),
-        items: ['active', 'not active']
-            .map((statusType) => DropdownMenuItem<String>(
-          value: statusType,
-          child: Text(statusType),
-        ))
-            .toList(),
-        onChanged: (value) {
-          setState(() {
-            selectedStatusType = value;
-          });
-        },
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please select a Status Type';
-          }
-          return null;
-        },
-      ),
+    return Consumer<StatusType>(
+      builder: (BuildContext context, StatusType value, Widget? child) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: DropdownButtonFormField<String>(
+            value: selectedStatusType,
+            decoration: InputDecoration(
+              labelText: 'Status Type',
+              prefixIcon: Icon(Icons.check_circle),
+              border: OutlineInputBorder(),
+            ),
+            items: value.list
+                .map((statusType) => DropdownMenuItem<String>(
+              value: statusType.Id,
+              child: Text(statusType.Name),
+            ))
+                .toList(),
+            onChanged: (value) {
+              setState(() {
+                selectedStatusType = value;
+              });
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please select a Status Type';
+              }
+              return null;
+            },
+          ),
+        );
+      },
     );
   }
   Widget _buildCategoriesDropDown() {
@@ -128,7 +136,7 @@ class _AddRestaurantScreenState extends State<AddRestaurantScreen> {
             ),
             items: value.list.map((category) {
               return DropdownMenuItem<String>(
-                value: category.Name,
+                value: category.Id,
                 child: Text(category.Name),
               );
             }).toList(),
@@ -171,5 +179,26 @@ class _AddRestaurantScreenState extends State<AddRestaurantScreen> {
         },
       ),
     );
+  }
+
+  add() async {
+    final response = await http.post(
+      Uri.parse(
+        "${ConstantValue.BASE_URL}addshop.php",
+      ),
+       body: {
+        "Name": nameController.text,
+        "NameAr": nameArController.text,
+        "Id_categories": selectedCategory.toString(),
+        "Longitude": "31",
+        "Latitude": "35",
+        "Id_statustypes": selectedStatusType.toString(),
+        "description": descriptionController.text,
+        "ImageURL": imageUrlController.text,
+        "lang": "en"
+      },
+    );
+  print(response.body);
+  Navigator.push(context, MaterialPageRoute(builder: (context) => AddRestaurantadminScreen(),));
   }
 }
