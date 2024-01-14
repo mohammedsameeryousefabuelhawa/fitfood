@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ecommerce/Admin/HomeScreen.dart';
 import 'package:ecommerce/const_values.dart';
 import 'package:ecommerce/general.dart';
 import 'package:flutter/material.dart';
@@ -234,15 +235,26 @@ class _LoginScreenState extends State<LoginScreen> {
             ConstantValue.Id_usertype, jsonBody["Id_usertype"]);
         await General.savePrefString(
             ConstantValue.Password, passwordTextEditingController.text);
-        // ignore: use_build_context_synchronously
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const MainScreen(),
-          ),
-        );
+
+        // Check the user type and navigate accordingly
+        if (jsonBody["Id_usertype"] == "1") {
+          // User type 1 - Navigate to user system
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>  MainScreen(),
+            ),
+          );
+        } else if (jsonBody["Id_usertype"] == "2") {
+          // User type 2 - Navigate to admin system
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>  AdminHomeScreenPage(),
+            ),
+          );
+        }
       } else {
-        // ignore: use_build_context_synchronously
         showModalBottomSheet(
           context: context,
           builder: (context) {

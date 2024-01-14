@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('ar'),
         ],
-        home:  AdminHomeScreenPage(),
+        home:  LoginScreen(),
       ),
     );
   }
