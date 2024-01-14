@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/allshopprovider.dart';
+import 'edit_shop.dart';
 
 class AllrestaurantScreen extends StatefulWidget {
   const AllrestaurantScreen({super.key});
@@ -30,6 +31,7 @@ class _AllrestaurantScreenState extends State<AllrestaurantScreen> {
                     height: MediaQuery.of(context).size.height * .1,
                     width: MediaQuery.of(context).size.width,
                     child: TextField(
+                      decoration: InputDecoration(labelText: 'Search Restaurants'),
                       onChanged: (text) {
                         value.search(text);
                       },
@@ -67,7 +69,18 @@ class _AllrestaurantScreenState extends State<AllrestaurantScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
+                                      IconButton(      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => EditRestaurantScreen(
+                                             restaurantId:  value.listSearch[index].shop_id.toString(),
+                                            ),
+                                          ),
+                                        );
+                                        print(value.listSearch[index].shop_id);
+                                      },
+                                        icon: Icon(Icons.edit),),
                                     ],
                                   )
                                 ],

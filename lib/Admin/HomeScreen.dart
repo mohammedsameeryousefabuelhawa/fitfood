@@ -14,13 +14,13 @@ class AdminHomeScreenPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: GridView.count(
-          crossAxisCount: 2,
+          crossAxisCount: 1,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
           children: [
             _buildEventCard(context, 'add restaurant', Icons.restaurant_menu),
             _buildEventCard(context, 'edit restaurant', Icons.edit),
-            _buildEventCard(context, 'delete restaurant', Icons.delete),
+            // _buildEventCard(context, 'delete restaurant', Icons.delete),
             // _buildEventCard(context, 'Event 4', Icons.event),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:ecommerce/providers/categories_provider.dart';
 import 'package:ecommerce/providers/item_provider.dart';
 import 'package:ecommerce/providers/orderprovier.dart';
 import 'package:ecommerce/providers/orderstatusprovider.dart';
+import 'package:ecommerce/providers/selectedShopprovider.dart';
 import 'package:ecommerce/providers/shop_provider.dart';
 import 'package:ecommerce/resAdmin/AdminDashboard.dart';
 import 'package:ecommerce/userview/screens/orders.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<selectedShopProvider>(
+          create: (context) => selectedShopProvider(),
+        ),
         ChangeNotifierProvider<StatusType>(
           create: (context) => StatusType(),
         ),
