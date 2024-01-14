@@ -1,13 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import '../const_values.dart';
 import '../providers/categories_provider.dart';
+import 'all_restaurant_screen.dart';
 
 class AddRestaurantadminScreen extends StatefulWidget {
+  var idShop;
+  AddRestaurantadminScreen({required String idShop}) : idShop = idShop;
+
   @override
-  _AddRestaurantadminScreenState createState() =>
-      _AddRestaurantadminScreenState();
+  State<AddRestaurantadminScreen> createState() =>  _AddRestaurantadminScreenState();
+
 }
 
 class _AddRestaurantadminScreenState extends State<AddRestaurantadminScreen> {
@@ -15,7 +21,6 @@ class _AddRestaurantadminScreenState extends State<AddRestaurantadminScreen> {
 
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController idCategoriesController = TextEditingController();
   String? selectedCategory;
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,12 +45,11 @@ class _AddRestaurantadminScreenState extends State<AddRestaurantadminScreen> {
                   label: 'password',
                   icon: Icons.restaurant,
                 ),
-                _buildCategoriesDropDown(),
                 SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // add();
+                      add();
                     }
                   },
                   child: Text('Add Restaurant'),
@@ -58,40 +62,6 @@ class _AddRestaurantadminScreenState extends State<AddRestaurantadminScreen> {
     );
   }
 
-  Widget _buildCategoriesDropDown() {
-    return Consumer<CategoriesProvider>(
-      builder: (BuildContext context, CategoriesProvider value, Widget? child) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: DropdownButtonFormField<String>(
-            value: selectedCategory,
-            decoration: InputDecoration(
-              labelText: 'Categories',
-              prefixIcon: Icon(Icons.check_circle),
-              border: OutlineInputBorder(),
-            ),
-            items: value.list.map((category) {
-              return DropdownMenuItem<String>(
-                value: category.Name,
-                child: Text(category.Name),
-              );
-            }).toList(),
-            onChanged: (value) {
-              setState(() {
-                selectedCategory = value;
-              });
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please select a Category';
-              }
-              return null;
-            },
-          ),
-        );
-      },
-    );
-  }
 
   Widget _buildTextFieldWithIcon({
     required TextEditingController controller,
@@ -117,24 +87,46 @@ class _AddRestaurantadminScreenState extends State<AddRestaurantadminScreen> {
     );
   }
 
-// add() async {
-//   final response = await http.post(
-//     Uri.parse(
-//       "${ConstantValue.BASE_URL}addshop.php",
-//     ),
-//     body: {
-//       "Name": nameController.text,
-//       "NameAr": nameArController.text,
-//       "Id_categories": "4",
-//       "Longitude": "31",
-//       "Latitude": "35",
-//       "Id_statustypes": "1",
-//       "description": descriptionController.text,
-//       "ImageURL": imageUrlController.text,
-//       "lang": "en"
-//     },
-//   );
-//   print(response.body);
-//   Navigator.push(context, MaterialPageRoute(builder: (context) => Text("Add User"),));
-// }
+  add() async {
+    if (widget.idShop == null) {
+      print("Error: idShop is null");
+      return;
+    }
+
+    final response = await http.post(
+      Uri.parse(
+        "${ConstantValue.BASE_URL}AddAdminShop.php",
+      ),
+      body: {
+        'Admin_Password': password.text,
+        'Email': email.text,
+        'Shop_Id': widget.idShop.toString(),
+      },
+    );
+
+    print(widget.idShop.toString());
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      if (data['result'] == true) {
+        // Request successful, handle accordingly
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AllrestaurantScreen(),));
+      } else {
+        // Request failed, display an error message
+        String errorMsg = data['msg'] != null ? data['msg'].toString() : "Unknown error";
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Error: $errorMsg"),
+          backgroundColor: Colors.red,
+        ));
+      }
+    } else {
+      // Handle other status codes if needed
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Error: ${response.statusCode}"),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
 }

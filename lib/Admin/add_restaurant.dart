@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import '../const_values.dart';
+import '../general.dart';
 import '../providers/StatusTypeProvider.dart';
 import '../providers/categories_provider.dart';
 import 'add_restaurant_admin.dart';
@@ -199,6 +202,14 @@ class _AddRestaurantScreenState extends State<AddRestaurantScreen> {
       },
     );
   print(response.body);
-  Navigator.push(context, MaterialPageRoute(builder: (context) => AddRestaurantadminScreen(),));
+    if (response.statusCode == 200) {
+      var jsonBody = jsonDecode(response.body);
+      var result = jsonBody["result"];
+      await General.savePrefString(ConstantValue.ShopAdminId, jsonBody["Id"].toString());
+      var ShopAdminId= jsonBody["Id"].toString();
+      print(ShopAdminId);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => AddRestaurantadminScreen(idShop:ShopAdminId ,),));
+
+    }
   }
 }

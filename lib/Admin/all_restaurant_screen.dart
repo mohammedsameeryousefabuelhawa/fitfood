@@ -42,24 +42,37 @@ class _AllrestaurantScreenState extends State<AllrestaurantScreen> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 1),
                       itemBuilder: (context, index) {
-                        return Container(
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SingleChildScrollView(
+                            child: Container(
 
-                          child: Column(
-                            children: [
-                              Container(
-                                color: Colors.black,
-                                child: Image.network(value.listSearch[index].ImageURL,fit: BoxFit.fill,width: MediaQuery.of(context).size.width*.8,),
+                              decoration: BoxDecoration(border: Border.all(style: BorderStyle.solid)),
+                              child: Column(
+                                children: [
+                                  Container(
+
+                                    color: Colors.black,
+                                    child: Image.network(value.listSearch[index].ImageURL,fit: BoxFit.fill,width: MediaQuery.of(context).size.width*.8,height: MediaQuery.of(context).size.height*.15,),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      value.listSearch[index].Name,
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 25),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
+                                    ],
+                                  )
+                                ],
                               ),
-                              SizedBox(height: 10,),
-                              Container(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  value.listSearch[index].Name,
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 25),
-                                ),
-                              )
-                            ],
+                            ),
                           ),
                         );
                       },
