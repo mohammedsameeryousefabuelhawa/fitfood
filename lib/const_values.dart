@@ -7,4 +7,6 @@ class ConstantValue {
   static String ConCode = "ConCode";
   static String Id_usertype = "Id_usertype";
   static String Password = "Password";
+  static String Email = "Email";
+  static String shop_id = "shop_id";
 }

@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import '../const_values.dart';
 import 'add_restaurant.dart';
 import 'all_restaurant_screen.dart';
 
 
 class AdminHomeScreenPage extends StatelessWidget {
   @override
+  Future<void> clearSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(ConstantValue.Id);
+    await prefs.remove(ConstantValue.Name);
+    await prefs.remove(ConstantValue.Phone);
+    await prefs.remove(ConstantValue.ConCode);
+    await prefs.remove(ConstantValue.Id_usertype);
+    await prefs.remove(ConstantValue.Password);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Admin Page'),
+        actions: [
+          IconButton(onPressed: (){
+            clearSharedPreferences();
+            Navigator.pushReplacementNamed(context, '/login');
+
+          }, icon: Icon(Icons.logout))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),

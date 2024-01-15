@@ -1,30 +1,31 @@
 import 'dart:convert';
+
+import 'package:ecommerce/userview/screens/login_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:ecommerce/Admin/HomeScreen.dart';
 import 'package:ecommerce/const_values.dart';
 import 'package:ecommerce/general.dart';
-import 'package:ecommerce/resAdmin/AdminLoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../widget/custom_button.dart';
-import 'main_screen.dart';
-import 'signup_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../userview/widget/custom_button.dart';
+import 'AdminDashboard.dart';
+
+class AdminLoginScreen extends StatefulWidget {
+  const AdminLoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<AdminLoginScreen> createState() => _AdminLoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _AdminLoginScreenState extends State<AdminLoginScreen> {
   bool showPassword = false;
-  String countryCode = "+962";
   double? height;
   double? width;
-  TextEditingController phoneTextEditingController = TextEditingController();
+  TextEditingController EmailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
 
   @override
@@ -98,19 +99,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Container(
                     margin: const EdgeInsets.only(right: 20),
-                    child: IntlPhoneField(
-                      controller: phoneTextEditingController,
+                    child: TextField(
+                      controller: EmailTextEditingController,
                       decoration: InputDecoration(
                         floatingLabelBehavior: FloatingLabelBehavior.always,
-                        hintText: "786983720",
-                        labelText: AppLocalizations.of(context)!.phone_number,
+                        hintText: "john@meu.com",
+                        labelText: "Email",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(31.5)),
                       ),
-                      initialCountryCode: "JO",
-                      onChanged: (phone) {
-                        countryCode = phone.countryCode;
-                      },
                     ),
                   ),
                   const SizedBox(
@@ -172,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.dont_have_an_account,
+                        "if you are user or admin",
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             color: Color.fromARGB(255, 66, 63, 63),
@@ -186,41 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SignupScreen(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!.register_now,
-                          style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                color: Color(0xffe09f29),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "if you are restaurant admin",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            color: Color.fromARGB(255, 66, 63, 63),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AdminLoginScreen(),
+                              builder: (context) => const LoginScreen(),
                             ),
                           );
                         },
@@ -248,82 +211,32 @@ class _LoginScreenState extends State<LoginScreen> {
   login() async {
     final response = await http.post(
       Uri.parse(
-        "${ConstantValue.BASE_URL}login.php",
+        "${ConstantValue.BASE_URL}adminLogin.php",
       ),
       body: {
-        "Phone": phoneTextEditingController.text,
-        "Password": passwordTextEditingController.text,
-        "ConCode": countryCode,
-        "lang": "ar"
+        "Email": EmailTextEditingController.text,
+        "Admin_Password": passwordTextEditingController.text,
       },
     );
+    print(response.body);
     if (response.statusCode == 200) {
       var jsonBody = jsonDecode(response.body);
       var result = jsonBody["result"];
       if (result) {
-        await General.savePrefString(ConstantValue.Id, jsonBody["Id"]);
-        await General.savePrefString(ConstantValue.Name, jsonBody["Name"]);
-        await General.savePrefString(ConstantValue.Phone, jsonBody["Phone"]);
+        await General.savePrefString(ConstantValue.Email, jsonBody["Email"]);
+        await General.savePrefString(ConstantValue.Id, jsonBody["Admin_Id"]);
         await General.savePrefString(
-            ConstantValue.ConCode, jsonBody["ConCode"]);
-        await General.savePrefString(
-            ConstantValue.Id_usertype, jsonBody["Id_usertype"]);
-        await General.savePrefString(
-            ConstantValue.Password, passwordTextEditingController.text);
-
-        // Check the user type and navigate accordingly
-        if (jsonBody["Id_usertype"] == "1") {
-          // User type 1 - Navigate to user system
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MainScreen(),
-            ),
-          );
-        } else if (jsonBody["Id_usertype"] == "2") {
-          // User type 2 - Navigate to admin system
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AdminHomeScreenPage(),
-            ),
-          );
+            ConstantValue.Password, jsonBody["Admin_Password"]);
+        if (jsonBody["Shop_Id"] != null) {
+          print(jsonBody["Shop_Id"]);
+          await General.savePrefInt(
+              ConstantValue.shop_id, int.parse(jsonBody["Shop_Id"]));
         }
-      } else {
-        showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return Container(
-              margin: const EdgeInsets.all(20),
-              width: width,
-              height: height! * .30,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(35),
-                  topRight: Radius.circular(35),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Icon(
-                    Icons.warning,
-                    size: 50,
-                  ),
-                  Text(
-                    jsonBody["msg"],
-                  ),
-                  CustomButton(
-                    text: AppLocalizations.of(context)!.ok,
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            );
-          },
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AdminPage(),
+          ),
         );
       }
     }
