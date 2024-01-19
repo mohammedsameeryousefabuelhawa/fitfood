@@ -1,8 +1,17 @@
+import 'package:ecommerce/resAdmin/menuscreen.dart';
 import 'package:flutter/material.dart';
 
 import 'add_items.dart';
 
-class AdminPage extends StatelessWidget {
+class AdminPage extends StatefulWidget {
+  String idShop;
+  AdminPage({required this.idShop});
+
+  @override
+  State<AdminPage> createState() => _AdminPageState();
+}
+
+class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +21,7 @@ class AdminPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: GridView.count(
-          crossAxisCount: 2,
+          crossAxisCount: 1,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
           children: [
@@ -57,10 +66,11 @@ class AdminPage extends StatelessWidget {
       ),
     );
   }
+
   void _navigateToPage(BuildContext context, String eventName) {
     switch (eventName.toLowerCase()) {
       case 'menu':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Text("menu")));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(idShop: widget.idShop,)));
         break;
       case 'add items':
         Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemPage()));
@@ -74,5 +84,4 @@ class AdminPage extends StatelessWidget {
         break;
     }
   }
-
 }

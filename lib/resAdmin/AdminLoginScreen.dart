@@ -232,10 +232,11 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
           await General.savePrefInt(
               ConstantValue.shop_id, int.parse(jsonBody["Shop_Id"]));
         }
+        var shop_id = jsonBody["Shop_Id"]  ;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => AdminPage(),
+            builder: (context) => AdminPage(idShop: shop_id,),
           ),
         );
       }
