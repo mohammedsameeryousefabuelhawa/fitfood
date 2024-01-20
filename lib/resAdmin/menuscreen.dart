@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/item_provider.dart';
+import 'edit_items.dart';
 class MenuScreen extends StatefulWidget {
   String idShop;
   MenuScreen({required this.idShop});
@@ -60,16 +61,19 @@ class _MenuScreenState extends State<MenuScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    IconButton(      onPressed: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => EditRestaurantScreen(
-                                      //       restaurantId:  value.listSearch[index].shop_id.toString(),
-                                      //     ),
-                                      //   ),
-                                      // );
-                                      // print(value.list[index].shop_id);
+                                    IconButton(      onPressed: (
+
+                                        ) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EditItemPage(
+                                            id: widget.idShop, Id_Item: value.list[index].Id.toString(),
+                                          ),
+                                        ),
+                                      );
+                                      print(value.list[index].Id.toString());
+                                      print(widget.idShop);
                                     },
                                       icon: Icon(Icons.edit),),
                                   ],

@@ -73,7 +73,7 @@ class _AdminPageState extends State<AdminPage> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen(idShop: widget.idShop,)));
         break;
       case 'add items':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemPage(idShop: widget.idShop,)));
         break;
       case 'orders':
         Navigator.push(context, MaterialPageRoute(builder: (context) => Text("orders")));
