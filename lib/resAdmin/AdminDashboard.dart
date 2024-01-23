@@ -1,4 +1,5 @@
 import 'package:ecommerce/resAdmin/menuscreen.dart';
+import 'package:ecommerce/resAdmin/foodorders.dart';
 import 'package:flutter/material.dart';
 
 import 'add_items.dart';
@@ -76,7 +77,7 @@ class _AdminPageState extends State<AdminPage> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemPage(idShop: widget.idShop,)));
         break;
       case 'orders':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Text("orders")));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => FoodProviderOrdersScreen()));
         break;
     // Add more cases for other events/pages if needed
       default:

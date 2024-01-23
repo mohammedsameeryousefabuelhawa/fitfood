@@ -7,6 +7,7 @@ import 'package:ecommerce/providers/orderstatusprovider.dart';
 import 'package:ecommerce/providers/selectedShopprovider.dart';
 import 'package:ecommerce/providers/selecteditemprovider.dart';
 import 'package:ecommerce/providers/shop_provider.dart';
+import 'package:ecommerce/providers/shopproviderorders.dart';
 import 'package:ecommerce/resAdmin/AdminDashboard.dart';
 import 'package:ecommerce/userview/screens/orders.dart';
 import 'package:ecommerce/userview/screens/splash_screen.dart';
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<foodOrderProvider>(
+          create: (context) => foodOrderProvider(),
+        ),
         ChangeNotifierProvider<selectedItemProvider>(
           create: (context) => selectedItemProvider(),
         ),
