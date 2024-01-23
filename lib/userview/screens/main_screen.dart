@@ -55,7 +55,9 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
+      //-----
       drawer: MyDrawer(),
+      //-----
       body: SingleChildScrollView(
         child: SizedBox(
           width: size!.width,

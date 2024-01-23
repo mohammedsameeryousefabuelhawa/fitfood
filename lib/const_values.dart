@@ -1,5 +1,5 @@
 class ConstantValue {
-  static String BASE_URL = "http://192.168.1.26/API/";
+  static String BASE_URL = "http://192.168.0.136/API/";
   static String Id = "Id";
   static String ShopAdminId = "ShopAdminId";
   static String Name = "Name";

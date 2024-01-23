@@ -7,6 +7,7 @@ import '../providers/orderprovier.dart';
 import '../providers/orderstatusprovider.dart';
 import '../providers/shopproviderorders.dart';
 import '../userview/widget/custom_category.dart';
+import 'orederdetails.dart';
 
 class FoodProviderOrdersScreen extends StatefulWidget {
   const FoodProviderOrdersScreen({super.key});
@@ -97,13 +98,13 @@ class _FoodProviderOrdersScreenState extends State<FoodProviderOrdersScreen> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         ItemScreen(idShop: value.list[index].Id),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    OrderDetailsScreen( orderNumber: value.list[index].order_id, shopId:value.list[index].shop_id ),
+                              ),
+                            );
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
